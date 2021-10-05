@@ -4,6 +4,7 @@
         if(have_posts()){
             while(have_posts()){
                 the_post(); 
+                $taxonomy = get_the_terms( get_the_ID(), 'categoria-productos');
             ?>
                 <h1 class="my-3">
                    Este producto es <?php the_title() ?>
@@ -21,7 +22,14 @@
                         'post_type' => 'producto',
                         'posts_per_page' => 2,
                         'order' => 'ASC',
-                        'orderby' => 'title'
+                        'orderby' => 'title',
+                        'tax_query' => array(
+                            array(
+                                'taxonomy' => 'categoria-productos',
+                                'field' => 'slug',
+                                'terms' => $taxonomy[0]->slug,
+                            ),
+                        ),
                     );
                     $producto = new WP_Query($args);
                     if($producto->have_posts()){ ?>

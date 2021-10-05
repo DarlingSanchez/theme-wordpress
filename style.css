@@ -7,7 +7,7 @@ Author url: https://github.com/DarlingSanchez
 
 */
 a,h1,h2,h3,h4,li,p,span,ul{
-    font-family:Montserrat;
+    font-family:Poppins;
 }
 .attachment-large{
     max-width:100%;
@@ -23,17 +23,17 @@ ul{
 header{
     background-color:#1c3643;
 }
-header nav li{
+header li{
     list-style:none;
     display:inline-block;
     padding:0 15px;
 }
-header nav li a{
+header li a{
     color:#fff;
     text-transform:uppercase;
 }
-header nav li a:hover{
-    color:#fff;
+a:hover{
+    color:#85CE37;
 }
 footer{
     background-color:#1c3643;

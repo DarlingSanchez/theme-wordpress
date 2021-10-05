@@ -14,9 +14,9 @@ add_action('after_setup_theme', 'init_template');
 
 function assets(){
     wp_register_style('bootstrap','https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css','','5.0.2','all');
-    wp_register_style('montserrat','https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap','','1.0','all');
+    wp_register_style('poppins','https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600&display=swap','','1.0','all');
 
-    wp_enqueue_style( 'estilos', get_stylesheet_uri(), array('bootstrap','montserrat'), '1.0', 'all');
+    wp_enqueue_style( 'estilos', get_stylesheet_uri(), array('bootstrap','poppins'), '1.0', 'all');
 
     wp_register_script( 'popper', 'https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js', '', '2.9.2', true );
 

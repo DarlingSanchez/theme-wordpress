@@ -76,3 +76,20 @@ function productos_type(){
     register_post_type( 'producto', $args);    
 }
 add_action( 'init','productos_type' );
+
+function dsgRegisterTax(){
+    $args = array(
+        'hierarchical' => true,
+        'labels' => array(
+            'name' => 'Categorías de Productos',
+            'singular_name' => 'Categoría de Productos',
+        ),
+        'show_in_nav_menu' => true,
+        'show_admin_column' =>true,
+        'rewrite' => array(
+            'slug' => 'categoria-productos'
+        ),
+    );
+    register_taxonomy( 'categoria-productos', array('producto'), $args );
+}
+add_action(  'init', 'dsgRegisterTax');

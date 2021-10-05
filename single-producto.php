@@ -14,6 +14,9 @@
                         <?php the_post_thumbnail( 'large') ?>
                     </div>
                     <div class="col-md-6 col-12">
+                        <?php echo do_shortcode('[contact-form-7 id="56" title="Contactanos"]') ?>
+                    </div>
+                    <div class="col-md-6 col-12">
                         <?php the_content() ?>
                     </div>
                 </div>

@@ -19,9 +19,15 @@ function assets(){
     wp_enqueue_style( 'estilos', get_stylesheet_uri(), array('bootstrap','poppins'), '1.0', 'all');
 
     wp_register_script( 'popper', 'https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js', '', '2.9.2', true );
+    //wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', '', '3.5.1', true );
+    
+    wp_enqueue_script('bootstraps','https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js', array('jquery','popper'),'5.0.2',true);
 
-    wp_enqueue_script('bootstraps','https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js',array('jquery','popper'),'5.0.2',true);
+    wp_enqueue_script( 'custom', get_template_directory_uri() . '/assets/js/custom.js', '', '1.0', true );
 
+    wp_localize_script( 'custom', 'dsg', array(
+        'ajaxurl' => admin_url('admin-ajax.php'),
+    ) );
 }
 
 add_action( 'wp_enqueue_scripts', 'assets');
@@ -93,3 +99,37 @@ function dsgRegisterTax(){
     register_taxonomy( 'categoria-productos', array('producto'), $args );
 }
 add_action(  'init', 'dsgRegisterTax');
+
+function dsgFiltroProductos(){
+    $args = array(
+        'post_type' => 'producto',
+        'posts_per_page' => -1,
+        'order' => 'ASC',
+        'orderby' => 'title',
+    );
+    if($_POST['categoria']){
+        $args['tax_query'] = array(
+            array(
+                'taxonomy' => 'categoria-productos',
+                'field' => 'slug',
+                'terms' => $_POST['categoria']
+            )
+            );
+    }
+    $productos = new WP_Query($args);
+    if($productos->have_posts()){
+        $return = array();
+        while($productos->have_posts(  )){
+            $productos->the_post();
+            $return[] = array(
+                'imagen' => get_the_post_thumbnail( get_the_ID(), 'large' ),
+                'link' => get_the_permalink(),
+                'titulo' => get_the_title( ),
+            );
+        }
+        wp_send_json($return);
+    }
+}
+
+add_action("wp_ajax_dsgFiltroProductos",'dsgFiltroProductos');
+add_action("wp_ajax_nopriv_dsgFiltroProductos",'dsgFiltroProductos');

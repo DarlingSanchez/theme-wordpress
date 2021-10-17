@@ -1,5 +1,6 @@
 //console.log('Prueba');
 (function($){
+    //FUNCION AJAX QUE NOS PERMITE CONECTAR A NUESTRA FUNCION PHP QUE NOS DEVUELVE LOS PRODUCTOS FILTRADOS
     $('#categorias-productos').change(function(){
         $.ajax({
             url: dsg.ajaxurl ,
@@ -25,7 +26,8 @@
             },
         });
     })
-
+    
+    //FUNCION AJAX QUE NOS PERMITE CONSUMIR NUSTRA API PARA MOSTRAR LAS NOVEDADES
     $(document).ready(function(){
         $.ajax({
             url: dsg.apiurl+"novedades/3" ,

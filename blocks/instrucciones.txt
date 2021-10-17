@@ -1,0 +1,4 @@
+-Primero creamos la carpeta blocks
+-luego nos ubicamos en la carpeta creada
+-luego ejecutamos el comando "npm install @wordpress/scripts --save-dev"
+-luego ejecutamos el comando "npm init -y"
